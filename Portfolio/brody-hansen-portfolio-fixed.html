@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brody Hansen</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+.tile video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tile video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+.tl {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  pointer-events: none;
+}
+
+.tile img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+.tile .tl {
+  z-index: 2;
+  pointer-events: none;
+}
+
+
+
+
+
+
+
+
+:root {
+  --bg: #F5F6FA;
+  --surface: #FFFFFF;
+  --surface-2: #ECEFF6;
+  --ink: #0D1220;
+  --muted: #4A5266;
+  --line: #DADFEA;
+  --accent: #2F5BFF;
+  --on-accent: #FFFFFF;
+  --accent-soft: #E4EBFF;
+  --accent-text: #2447D6;
+  --display: 'Bricolage Grotesque', 'Inter', system-ui, sans-serif;
+  --body: 'Inter', system-ui, sans-serif;
+  --mono: 'DM Mono', ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #090C14;
+    --surface: #111625;
+    --surface-2: #171D31;
+    --ink: #EDF0F8;
+    --muted: #A3ACC2;
+    --line: #232A3F;
+    --accent: #6F94FF;
+    --on-accent: #071029;
+    --accent-soft: #16224A;
+    --accent-text: #8FAEFF;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #090C14;
+  --surface: #111625;
+  --surface-2: #171D31;
+  --ink: #EDF0F8;
+  --muted: #A3ACC2;
+  --line: #232A3F;
+  --accent: #6F94FF;
+  --on-accent: #071029;
+  --accent-soft: #16224A;
+  --accent-text: #8FAEFF;
+  color-scheme: dark;
+}
+
+html { scroll-behavior: smooth; }
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 17px/1.65 var(--body);
+  padding-block: 0;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1180px; margin: 0 auto; }
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 3px; }
+h1, h2, h3, p, ul, dl, dd, figure { margin: 0; }
+ul { padding: 0; list-style: none; }
+
+/* Header and menu */
+.top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; padding-block: 20px; }
+.brand { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; font-family: var(--display); font-weight: 700; font-size: 19px; }
+.mark { position: relative; width: 40px; height: 40px; border: 2px solid var(--ink); border-radius: 50%; font-family: var(--display); font-weight: 700; font-size: 15px; line-height: 1; }
+.mark span { position: absolute; }
+.mark span:first-child { left: 8px; top: 4px; }
+.mark span:last-child { right: 8px; bottom: 4px; }
+.menu { display: flex; flex-wrap: wrap; gap: 4px; padding: 4px; background: var(--surface); border: 1px solid var(--line); border-radius: 26px; }
+.menu a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px; font-weight: 500; font-size: 15px; color: var(--muted); transition: color .15s, background .15s; }
+.menu a:hover { color: var(--ink); }
+.menu a[aria-current="page"] { background: var(--ink); color: var(--bg); }
+
+/* Views */
+.view { display: flex; flex-direction: column; gap: 96px; padding-block: 32px 96px; scroll-margin-top: 24px; }
+.eyebrow { font-family: var(--mono); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-text); }
+.h2 { font-family: var(--display); font-weight: 700; font-size: clamp(36px, 5vw, 64px); line-height: 1.04; letter-spacing: -.025em; text-wrap: balance; }
+.lead { font-size: clamp(19px, 2vw, 23px); line-height: 1.6; color: var(--muted); max-width: 60ch; }
+.sechead { display: flex; flex-direction: column; gap: 14px; max-width: 760px; }
+
+/* Hero */
+.hero { display: flex; flex-wrap: wrap; align-items: center; gap: 48px 64px; padding-top: 24px; }
+.hero-text { flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 28px; }
+h1 { font-family: var(--display); font-weight: 800; font-size: clamp(52px, 11vw, 160px); line-height: .92; letter-spacing: -.04em; }
+.dot { color: var(--accent-text); }
+.btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 26px; border-radius: 999px; border: 1.5px solid var(--accent); background: var(--accent); color: var(--on-accent); font: 600 16px var(--body); cursor: pointer; transition: transform .15s; }
+.btn:hover { transform: translateY(-2px); }
+.btn.alt { background: transparent; color: var(--ink); border-color: var(--ink); }
+.portrait { position: relative; flex: 0 1 360px; width: 100%; max-width: 100%; min-width: 0; aspect-ratio: 4 / 5; display: flex; align-items: flex-end; padding: 20px; overflow: hidden; border-radius: 28px; border: 1px solid var(--line); background: var(--accent-soft); }
+.ring { position: absolute; left: 50%; top: 44%; width: 56%; aspect-ratio: 1; transform: translate(-50%, -50%); border: 3px solid var(--accent-text); border-radius: 50%; }
+.ring span { position: absolute; font-family: var(--display); font-weight: 700; font-size: clamp(44px, 8vw, 86px); line-height: 1; color: var(--accent-text); }
+.ring span:first-child { left: 14%; top: 8%; }
+.ring span:last-child { right: 14%; bottom: 8%; }
+.cap { position: relative; font-family: var(--mono); font-size: 13px; color: var(--muted); }
+
+/* Numbers */
+.stats { display: flex; flex-wrap: wrap; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.stat { flex: 1 1 220px; min-width: 0; padding: 32px 24px 32px 0; }
+.stat b { display: block; font-family: var(--display); font-weight: 800; font-size: clamp(44px, 6vw, 76px); line-height: 1; letter-spacing: -.03em; }
+.stat span { display: block; max-width: 26ch; margin-top: 10px; font-size: 15px; color: var(--muted); }
+
+/* About */
+.about { display: flex; flex-wrap: wrap; gap: 40px 72px; }
+.about > div:first-child { flex: 1 1 280px; min-width: 0; }
+.about > div:last-child { flex: 2 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 22px; font-size: 19px; color: var(--muted); }
+.facts { display: flex; flex-direction: column; margin-top: 12px; border-top: 1px solid var(--line); font-size: 16px; }
+.facts div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 24px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.facts dt { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.facts dd { font-weight: 500; color: var(--ink); }
+
+/* Cards */
+.row { display: flex; flex-wrap: wrap; gap: 20px; }
+.card { flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 14px; padding: 32px; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; }
+.card h3 { font-family: var(--display); font-weight: 700; font-size: 26px; line-height: 1.15; letter-spacing: -.01em; }
+.card p { color: var(--muted); }
+.icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: var(--accent-soft); color: var(--accent-text); }
+
+/* Resume */
+.resume { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 56px 72px; }
+.exp { flex: 2 1 520px; min-width: 0; }
+.side { flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 48px; }
+.timeline { margin-left: 6px; padding-left: 32px; border-left: 2px solid var(--line); }
+.job { position: relative; padding-bottom: 48px; }
+.job:last-child { padding-bottom: 0; }
+.job::before { content: ""; position: absolute; left: -39px; top: 8px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--bg); }
+.when { font-family: var(--mono); font-size: 13px; letter-spacing: .04em; color: var(--accent-text); }
+.job h3 { margin-top: 4px; font-family: var(--display); font-weight: 700; font-size: 26px; line-height: 1.15; }
+.org { margin-top: 2px; font-weight: 500; color: var(--muted); }
+.job ul { display: flex; flex-direction: column; gap: 6px; margin-top: 14px; color: var(--muted); }
+.job li { position: relative; padding-left: 20px; }
+.job li::before { content: ""; position: absolute; left: 0; top: .78em; width: 8px; height: 2px; background: var(--accent); }
+.side h3 { margin-bottom: 16px; font-family: var(--display); font-weight: 700; font-size: 22px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { padding: 5px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); font-size: 14.5px; font-weight: 500; }
+.edu { display: flex; flex-direction: column; gap: 4px; padding: 24px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
+.edu + .edu { margin-top: 12px; }
+.edu.now { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.edu .when { color: inherit; opacity: .8; }
+.edu b { font-family: var(--display); font-weight: 700; font-size: 21px; line-height: 1.2; }
+
+/* Projects */
+.projects { display: flex; flex-wrap: wrap; gap: 24px; }
+.proj { flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; overflow: hidden; background: var(--surface); border: 1px solid var(--line); border-radius: 24px; transition: transform .2s, border-color .2s; }
+.proj:hover { transform: translateY(-4px); border-color: var(--accent); }
+.proj.wide { flex-basis: 100%; }
+.art { position: relative; height: 200px; overflow: hidden; background: var(--accent-soft); }
+.art i { position: absolute; display: block; }
+.pbody { display: flex; flex-direction: column; gap: 12px; padding: 28px; }
+.pbody h3 { font-family: var(--display); font-weight: 700; font-size: 28px; line-height: 1.1; letter-spacing: -.01em; }
+.pbody p { color: var(--muted); }
+.meta { font-family: var(--mono); font-size: 13px; color: var(--accent-text); }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.tags span { padding: 3px 12px; border: 1px solid var(--line); border-radius: 999px; font-size: 14px; font-weight: 500; }
+.proj.ph { background: transparent; border: 1.5px dashed var(--muted); }
+.proj.ph:hover { transform: none; border-color: var(--muted); }
+.proj.ph .art { background: repeating-linear-gradient(135deg, transparent 0 12px, var(--line) 12px 13px); }
+
+/* Social */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.fbtn { min-height: 44px; padding: 0 20px; border: 1.5px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); font: 500 15px var(--body); cursor: pointer; }
+.fbtn[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.gallery { column-width: 260px; column-gap: 20px; }
+.tile { position: relative; display: flex; align-items: flex-end; width: 100%; margin: 0 0 20px; padding: 18px; overflow: hidden; break-inside: avoid; border: 1px solid var(--line); border-radius: 20px; color: var(--ink); }
+.tile[hidden] { display: none; }
+.r169 { aspect-ratio: 16 / 9; }
+.r916 { aspect-ratio: 9 / 16; }
+.r11 { aspect-ratio: 1; }
+.r45 { aspect-ratio: 4 / 5; }
+.c1 { background: var(--accent-soft); }
+.c2 { background: var(--surface-2); }
+.c3 { background: var(--surface); }
+.ic { position: absolute; left: 50%; top: 50%; display: grid; place-items: center; width: 64px; height: 64px; transform: translate(-50%, -60%); border-radius: 50%; background: var(--accent); color: var(--on-accent); }
+.ic.pic { border: 2px solid var(--accent-text); background: transparent; color: var(--accent-text); border-radius: 18px; }
+.tl { position: relative; display: flex; flex-direction: column; gap: 2px; }
+.tl b { font-weight: 600; font-size: 15px; }
+.tl em { font-style: normal; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+/* Contact */
+.big { font-family: var(--display); font-weight: 700; font-size: 26px; line-height: 1.2; overflow-wrap: anywhere; }
+.copy { align-self: flex-start; min-height: 44px; padding: 0 18px; border: 1.5px solid var(--line); border-radius: 999px; background: var(--bg); color: var(--ink); font: 600 14px var(--body); cursor: pointer; }
+.copy:hover { border-color: var(--accent-text); }
+.mono { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.refname { font-family: var(--display); font-weight: 700; font-size: 22px; line-height: 1.15; }
+.quote { font-family: var(--display); font-weight: 700; font-size: 56px; line-height: .7; color: var(--accent-text); }
+.who { font-weight: 600; font-size: 15px; }
+.who span { display: block; font-weight: 400; color: var(--muted); }
+
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding-block: 32px 40px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+  .btn:hover, .proj:hover { transform: none; }
+}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+
+<header class="top">
+  <a class="brand" href="#view-about" aria-label="Brody Hansen, about">
+    <div class="mark" aria-hidden="true"><span>B</span><span>H</span></div>
+    <span>Brody Hansen</span>
+  </a>
+  <nav class="menu" aria-label="Main menu">
+    <a href="#view-about" data-nav="about">About</a>
+    <a href="#view-resume" data-nav="resume">Resume</a>
+    <a href="#view-projects" data-nav="projects">Projects</a>
+    <a href="#view-social" data-nav="social">Social media</a>
+    <a href="#view-contact" data-nav="contact">Contact</a>
+  </nav>
+</header>
+
+<!-- ABOUT (home) -->
+<main>
+<section class="view" id="view-about">
+  <div class="hero">
+    <div class="hero-text">
+      <div class="eyebrow">Lethbridge, AB · CIT diploma in progress</div>
+      <h1>Brody Hansen<span class="dot">.</span></h1>
+      <p class="lead">Versatile leader and Computer Information Technology student at Lethbridge Polytechnic. Reliable, adaptable and hands-on, with a strong work ethic.</p>
+      <div class="btns">
+        <a class="btn" href="#view-resume">View my resume</a>
+        <a class="btn alt" href="#view-contact">Get in touch</a>
+      </div>
+    </div>
+    <figure class="portrait">
+      <!-- Replace this block with: <img src="your-photo.jpg" alt="Brody Hansen"> -->
+      <div class="ring" aria-hidden="true"><span>B</span><span>H</span></div>
+      <figcaption class="cap">[Add your photo]</figcaption>
+    </figure>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b>32</b><span>People supervised on the roguing team</span></div>
+    <div class="stat"><b>~210</b><span>Employees in the youth employment program I managed</span></div>
+    <div class="stat"><b>5 Years</b><span>Of Managment Experiance</span></div>
+  <div class="stat"><b>2024,<br> 2026</b><span>Food truck of the year</span></div>
+  </div>
+
+  <div class="about">
+    <div class="sechead">
+      <div class="eyebrow">About me</div>
+      <h2 class="h2">Hands-on, now building IT skills.</h2>
+    </div>
+    <div>
+      <p>I'm working toward my Computer Information Technology diploma at Lethbridge Polytechnic while I keep running The Tailgators, the food truck I have owned and operated in Lethbridge since 2014.</p>
+      <p>Before IT, my work was hands-on: farm and ranch labour, store supervision, community outreach with the Canadian Mental Health Association, and field management with Select People Solutions. I also create and manage social media content, including video, for The Tailgators and for Select People Solutions.</p>
+      <dl class="facts">
+        <div><dt>Based in</dt><dd>Lethbridge, AB</dd></div>
+        <div><dt>Studying</dt><dd>Computer Information Technology</dd></div>
+        <div><dt>School</dt><dd>Lethbridge Polytechnic</dd></div>
+        <div><dt>Licence</dt><dd>Class 4 Alberta Driver's License</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:32px">
+    <div class="sechead">
+      <div class="eyebrow">What I bring</div>
+      <h2 class="h2">Technical, people-focused and dependable.</h2>
+    </div>
+    <div class="row">
+      <div class="card">
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="13" rx="2"></rect><path d="M8 21h8"></path><path d="M12 17v4"></path></svg></div>
+        <h3>Technical</h3>
+        <p>Strong technical and mechanical skills, troubleshooting, and excellent computer literacy, now backed by formal training in my CIT diploma.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20a6.5 6.5 0 0 1 13 0"></path><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8"></path><path d="M18 14.2a6.5 6.5 0 0 1 3.5 5.8"></path></svg></div>
+        <h3>Leadership</h3>
+        <p>Supervision and team management, from a team of 32 on the roguing team to a youth employment program of roughly 210 employees.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg></div>
+        <h3>Service and safety</h3>
+        <p>Customer interaction, plus training in first aid and CPR, crisis intervention, de-escalation and naloxone administration.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESUME -->
+<section class="view" id="view-resume">
+  <div class="sechead">
+    <div class="eyebrow">Resume</div>
+    <h2 class="h2">Experience, skills and education.</h2>
+    <p class="lead">Versatile leader with strong technical and mechanical skills and experience in agriculture, management, and customer service.</p>
+  </div>
+
+  <div class="resume">
+    <div class="exp">
+      <div class="timeline">
+
+        <div class="job">
+          <div class="when">2014 - Present</div>
+          <h3>Owner/Operations</h3>
+          <div class="org">The Tailgators (Food Truck), Lethbridge, AB</div>
+          <ul>
+            <li>Setup/Teardown of heavy equipment.</li>
+            <li>Reconcile cash out and cash flow management</li>
+            <li>Staff scheduling and training</li>
+            <li>Social Media management</li>
+            <li>Preparation &amp; delivery of food &amp; drinks in a fast-paced, large crowd food truck environment</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="when">Summer 2026</div>
+          <h3>Field Manager (Logistic and Operations)</h3>
+          <div class="org">Select People Solutions</div>
+          <ul>
+            <li>Managing the largest youth employment program in Southern Alberta (Roughly 210 employees.)</li>
+            <li>Working alongside Bayer Crop Science and Corteva Agriscience to maintain high standards of quality, productivity, and operational performance.</li>
+            <li>Developing and implementing a comprehensive training program for our field leaders, covering safety, roles and responsibilities, crew management, paperwork and office submissions, trailer training, and housekeeping standards.</li>
+            <li>Basic truck maintenance of 12 truck fleet.</li>
+            <li>Managing all supplies and hands-on logistical challenges to ensure smooth and efficient field operations.</li>
+            <li>Brought back into the office after season to support social media, videography, and content creation.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="when">Summer 2025</div>
+          <h3>Lead Hand - Roguing Team</h3>
+          <div class="org">Select People Solutions</div>
+          <ul>
+            <li>Collaborate with field managers to supervise a team of 32 people for the purpose of roguing fields</li>
+            <li>Company truck operation</li>
+            <li>Monitoring and achieving production goals with a team-centered approach</li>
+            <li>Perform safety monitoring and administration of first aid on site</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="when">March 2024 - April 2025 (Store Closure)</div>
+          <h3>Supervisor</h3>
+          <div class="org">Peavey Mart Lethbridge</div>
+          <ul>
+            <li>Supervision of staff and operations</li>
+            <li>Cash out responsibility</li>
+            <li>Scheduling of daily objectives and staff workflow management</li>
+            <li>Store opening and closing duties</li>
+            <li>Shipping and receiving of products</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="when">July 2019 - December 2022</div>
+          <h3>Diversion Outreach Team (DOT)</h3>
+          <div class="org">Canadian Mental Health Association</div>
+          <ul>
+            <li>Provided safe transportation for clients to local shelters, hospitals, and medical appointments.</li>
+            <li>Worked in collaboration with Lethbridge Police Services to support non criminal calls and provide further transportation service</li>
+            <li>Worked with EMS to provide non-ambulance transportation after medical clearance</li>
+            <li>Respond to distress calls from local downtown businesses.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="when">Summer 2017</div>
+          <h3>General Labour</h3>
+          <div class="org">Green Prairie Int. (Select People Solutions)</div>
+          <ul>
+            <li>Hay processing duties</li>
+            <li>Load and unload trucks bringing in hay for processing on site</li>
+            <li>General machine maintenance and sanitation</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <aside class="side">
+      <div>
+        <h3>Education</h3>
+        <div class="edu now">
+          <div class="when">Ongoing</div>
+          <b>Computer Information Technology Diploma</b>
+          <span>Lethbridge Polytechnic</span>
+        </div>
+        <div class="edu">
+          <div class="when">Completed</div>
+          <b>Highschool Diploma</b>
+          <span>Chinook High School</span>
+        </div>
+      </div>
+      <div>
+        <h3>Skills</h3>
+        <div class="chips">
+          <span class="chip">Supervision &amp; Team Management</span>
+          <span class="chip">Troubleshooting Skills</span>
+          <span class="chip">Excellent Computer Literacy</span>
+          <span class="chip">Creative Digital Marketer</span>
+          <span class="chip">Social Media Management</span>
+          
+         
+          <span class="chip">Capable of Heavy Lifting</span>
+          <span class="chip">Incident Reporting &amp; Safety Action</span>
+          <span class="chip">Class 4 Alberta Driver's License</span>
+        </div>
+      </div>
+      <div>
+        <h3>Training</h3>
+        <div class="chips">
+          <span class="chip">UI/UX Design</span>
+          <span class="chip">Digital Marketing</span>
+          <span class="chip">Technical Support</span>
+          <span class="chip">Basic Coding</span>
+          <span class="chip">Project Leadership</span>
+          <span class="chip">Business Operations</span>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="view" id="view-projects">
+  <div class="sechead">
+    <div class="eyebrow">Projects</div>
+    <h2 class="h2">Work I have built and led.</h2>
+    <p class="lead">Projects from my career so far, with CIT coursework added as I complete it.</p>
+  </div>
+
+  <div class="projects">
+
+    <article class="proj wide">
+      <div class="art" aria-hidden="true">
+        <i style="right:-40px;top:-60px;width:260px;height:260px;border-radius:50%;background:var(--accent)"></i>
+        <i style="left:32px;bottom:32px;width:180px;height:14px;border-radius:7px;background:var(--ink)"></i>
+        <i style="left:32px;bottom:58px;width:110px;height:14px;border-radius:7px;background:var(--accent-text)"></i>
+        <i style="left:32px;bottom:84px;width:150px;height:14px;border-radius:7px;background:var(--ink);opacity:.35"></i>
+      </div>
+      <div class="pbody">
+        <div class="meta">2014 - Present · Business</div>
+        <h3>The Tailgators</h3>
+        <p>A food truck business I own and operate along side my family, in Lethbridge. I handle operations and logistics, cash flow, staff scheduling and training, social media, and fast-paced food service for large crowds.</p>
+        <div class="tags"><span>Operations and Logistics</span><span>Payroll</span><span>Social media</span><span>Customer Service</span><span>Business Rules</span></div>
+      </div>
+    </article>
+
+    <article class="proj">
+      <div class="art">
+  <img src="images/tailgators-truck.jpg"
+       alt="The Tailgators food truck">
+</div>
+
+
+
+
+      <div class="pbody">
+        <div class="meta">Summer 2026 · Training</div>
+        <h3>Field Leader Training Program</h3>
+        <p>A comprehensive training program I developed and implemented for field leaders at Select People Solutions. It covers safety, roles and responsibilities, crew management, paperwork and office submissions, trailer training and housekeeping standards.</p>
+        <div class="tags"><span>Training</span><span>Safety</span><span>Leadership</span></div>
+      </div>
+    </article>
+
+    <article class="proj">
+      <div class="art" aria-hidden="true">
+        <i style="left:40px;top:40px;width:130px;height:130px;background:var(--surface)"></i>
+        <i style="left:110px;top:70px;width:130px;height:130px;border:3px solid var(--accent-text)"></i>
+        <i style="right:40px;top:40px;width:56px;height:56px;border-radius:50%;background:var(--ink)"></i>
+      </div>
+      <div class="pbody">
+        <div class="meta">Summer 2026 · Operations</div>
+        <h3>Southern Alberta Youth Employment Program</h3>
+        <p>As field manager for logistics and operations, I managed the largest youth employment program in Southern Alberta, roughly 210 employees, working alongside Bayer Crop Science and Corteva Agriscience. I also handled supplies, logistics and basic maintenance on a 12 truck fleet.</p>
+        <div class="tags"><span>Logistics</span><span>Fleet</span><span>Team management</span></div>
+      </div>
+    </article>
+
+    <article class="proj ph">
+      <div class="art" aria-hidden="true"></div>
+      <div class="pbody">
+        <div class="meta">[CIT coursework or personal project]</div>
+        <h3>[Project name]</h3>
+        <p>[Add what you built, the tools you used and what you learned.]</p>
+        <div class="tags"><span>[Tool]</span><span>[Tool]</span><span>[Tool]</span></div>
+      </div>
+    </article>
+
+    <article class="proj ph">
+      <div class="art" aria-hidden="true"></div>
+      <div class="pbody">
+        <div class="meta">[CIT coursework or personal project]</div>
+        <h3>[Project name]</h3>
+        <p>[Add what you built, the tools you used and what you learned.]</p>
+        <div class="tags"><span>[Tool]</span><span>[Tool]</span><span>[Tool]</span></div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- SOCIAL MEDIA -->
+<section class="view" id="view-social">
+  <div class="sechead">
+    <div class="eyebrow">Social media</div>
+    <h2 class="h2">Videos and graphics I have made.</h2>
+    <p class="lead">I manage social media for The Tailgators and supported social media, videography and content creation at Select People Solutions. Here is a selection of my work.</p>
+  </div>
+
+  <div class="filters" role="group" aria-label="Filter by type">
+    <button class="fbtn" type="button" data-filter="all" aria-pressed="true">All</button>
+    <button class="fbtn" type="button" data-filter="video" aria-pressed="false">Videos</button>
+    <button class="fbtn" type="button" data-filter="picture" aria-pressed="false">Pictures</button>
+  </div>
+
+  <!-- To add your own work: replace the contents of a tile with <img src="..."> or <video controls src="...">. -->
+  <div class="gallery">
+   <div class="tile r169 c1" data-kind="video">
+  <video controls>
+    <source src="videos/Airbnbpinriver.mp4" type="video/mp4">
+    Your browser does not support this video.
+  </video>
+  <div class="tl">
+    <b>Air BNB</b>
+    <em>Alpine Retreat</em>
+  </div>
+</div>
+    <div class="tile r11 c2" data-kind="picture">
+      <div class="ic pic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><circle cx="9" cy="10" r="2"></circle><path d="M21 16l-5-5-9 9"></path></svg></div>
+      <div class="tl"><b>[Post title]</b><em>Picture</em></div>
+    </div>
+    
+	
+	<div class="tile r916 c3" data-kind="video">
+  <video autoplay muted loop playsinline controls>
+    <source src="videos/safety.mp4" type="video/mp4">
+    Your browser does not support this video.
+  </video>
+  <div class="tl">
+    <b>Safety Video</b>
+    <em>Select People Solutions</em>
+  </div>
+</div>
+
+    <div class="tile r45 c1" data-kind="picture">
+  <img src="images/Caylee.jpg" alt="Description of picture">
+  <div class="tl">
+    <b>Cozy Doll</b>
+    <em>Alpine Retreat</em>
+  </div>
+</div>
+    <div class="tile r169 c2" data-kind="video">
+      <div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg></div>
+      <div class="tl"><b>[Video title]</b><em>Video</em></div>
+    </div>
+    <div class="tile r11 c3" data-kind="picture">
+      <div class="ic pic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><circle cx="9" cy="10" r="2"></circle><path d="M21 16l-5-5-9 9"></path></svg></div>
+      <div class="tl"><b>[Post title]</b><em>Picture</em></div>
+    </div>
+    <div class="tile r45 c2" data-kind="picture">
+      <div class="ic pic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><circle cx="9" cy="10" r="2"></circle><path d="M21 16l-5-5-9 9"></path></svg></div>
+      <div class="tl"><b>[Post title]</b><em>Picture</em></div>
+    </div>
+   
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="view" id="view-contact">
+  <div class="sechead">
+    <div class="eyebrow">Contact</div>
+    <h2 class="h2">Let's connect.</h2>
+    <p class="lead">Reach me by email or phone. References and kind words from people I have worked with are below.</p>
+  </div>
+
+  <div class="row">
+    <div class="card">
+      <div class="mono">Email</div>
+      <div class="big" id="val-email">brodyhansen88@gmail.com</div>
+      <button class="copy" type="button" data-copy="val-email">Copy email</button>
+    </div>
+    <div class="card">
+      <div class="mono">Phone</div>
+      <div class="big" id="val-phone">(403) 331-8285</div>
+      <button class="copy" type="button" data-copy="val-phone">Copy number</button>
+    </div>
+    <div class="card">
+      <div class="mono">Location</div>
+      <div class="big">Lethbridge, AB</div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:32px">
+    <div class="sechead">
+      <div class="eyebrow">References</div>
+      <h2 class="h2">People who can speak to my work.</h2>
+      <p class="lead">Contact details are available on request.</p>
+    </div>
+    <div class="row">
+      <div class="card"><div class="refname">Ryan Miller</div><p>Owner<br>Select People Solutions / Teamworks Career Centre</p></div>
+      <div class="card"><div class="refname">Drew Gamble</div><p>Store Manager<br>Peavey Mart Lethbridge</p></div>
+      <div class="card"><div class="refname">Tyson Moch</div><p>Supervisor<br>Canadian Mental Health Association (DOT Program)</p></div>
+      
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:32px">
+    <div class="sechead">
+      <div class="eyebrow">Kind words</div>
+      <h2 class="h2">What people say about working with me.</h2>
+    </div>
+    <div class="row">
+      <div class="card">
+        <div class="quote" aria-hidden="true">&ldquo;</div>
+        <p>[Add a short quote from Ryan Miller about working with you.]</p>
+        <div class="who">Ryan Miller<span>Owner, Select People Solutions</span></div>
+      </div>
+      <div class="card">
+        <div class="quote" aria-hidden="true">&ldquo;</div>
+        <p>[Add a short quote from Drew Gamble about working with you.]</p>
+        <div class="who">Drew Gamble<span>Store Manager, Peavey Mart Lethbridge</span></div>
+      </div>
+      <div class="card">
+        <div class="quote" aria-hidden="true">&ldquo;</div>
+        <p>[Add a short quote from Tyson Moch about working with you.]</p>
+        <div class="who">Tyson Moch<span>Supervisor, Canadian Mental Health Association</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <span>Brody Hansen · Lethbridge, AB</span>
+  <span>Computer Information Technology · Lethbridge Polytechnic</span>
+</footer>
+
+</div>
+
+<script>
+(function () {
+  // Social media filter
+  var fbtns = document.querySelectorAll('.fbtn');
+  fbtns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var f = b.getAttribute('data-filter');
+      fbtns.forEach(function (x) {
+        x.setAttribute('aria-pressed', x === b ? 'true' : 'false');
+      });
+      document.querySelectorAll('.tile').forEach(function (t) {
+        t.hidden = !(f === 'all' || t.getAttribute('data-kind') === f);
+      });
+    });
+  });
+
+  // Copy buttons
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    var original = btn.textContent;
+    btn.addEventListener('click', function () {
+      var src = document.getElementById(btn.getAttribute('data-copy'));
+      var text = src ? src.textContent : '';
+
+      function done() {
+        btn.textContent = 'Copied';
+        setTimeout(function () { btn.textContent = original; }, 1500);
+      }
+
+      function fallback() {
+        if (!src) return;
+        try {
+          var range = document.createRange();
+          range.selectNodeContents(src);
+          var sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+        } catch (e) {}
+      }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, fallback);
+      } else {
+        fallback();
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
